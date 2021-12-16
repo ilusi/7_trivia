@@ -90,7 +90,15 @@ export default function Form(props) {
 
    return (
       <form onSubmit={handleSubmit} className="form--quiz">
-         {quizElements}
+         {
+            (quiz.length > 0)
+               ? quizElements
+               : <img
+                  src="/loading.gif"
+                  alt="Loading. . ."
+                  className="image-loading"
+               />
+         }
          <div className="form--quiz__submit-button-container">
             {
                (score > 0)

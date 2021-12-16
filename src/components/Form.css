@@ -62,7 +62,8 @@ label {
 
 .form--quiz__submit-button-container>button {
    margin-top: 25px;
-   width: 120px;
+   padding: 5px;
+   max-width: 150px;
    height: 35px;
    background: #4D5B9E;
    border-radius: 10px;
@@ -72,11 +73,17 @@ label {
    font-size: 14px;
    line-height: 12px;
    text-align: center;
-
+   white-space: nowrap;
    color: #F5F7FB;
 }
 
 .form--quiz__paragraph-error {
    color: red;
    margin-bottom: 12px;
+}
+
+.image-loading {
+   width: 50%;
+   height: auto;
+   align-self: center;
 }
