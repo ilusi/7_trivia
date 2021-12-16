@@ -1,4 +1,4 @@
-# Trivia App using React (non-class component)
+# Trivia App using React (func-based & class-based components)
 
 Trivia questions are provided by [Open Trivia DB API](https://opentdb.com/)
 
