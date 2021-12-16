@@ -75,3 +75,20 @@
    left: 0;
    z-index: -1;
 }
+
+.stat-container {
+   margin-top: 50px;
+   font-family: Inter;
+   font-style: normal;
+   line-height: 10px;
+   color: #293264;
+}
+
+.stat-container>h4 {
+   font-weight: bold;
+   font-size: 10px;
+}
+
+.stat-container>ul {
+   font-size: 9px;
+}

@@ -4,8 +4,6 @@ import Form from './components/Form'
 import './App.css'
 
 export default function App() {
-   console.log("*** App Rendering ***")
-
    // There are 3 pages total in the Trivia: List of pages and buttons' labels.
    const PAGE_COVER = "start-quiz"
    const PAGE_QUIZ = "check-answers"

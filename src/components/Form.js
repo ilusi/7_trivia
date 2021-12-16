@@ -2,9 +2,46 @@ import React from "react"
 import Quiz from './Quiz'
 import { nanoid } from "nanoid"
 import './Form.css'
+// import data from './data'
 
 export default function Form(props) {
-   const [score, setScore] = React.useState(0)
+   const initStat = {
+      date: '',
+      category: '',
+      difficulty: '',
+      score: ''
+   }
+
+   const reducer = (stat, action) => {
+      let newStat
+
+      switch (action.type) {
+         case 'settings':
+            newStat = {
+               ...stat,
+               category: action.value.category,
+               difficulty: action.value.difficulty
+            }
+            break
+
+         case 'score':
+            newStat = {
+               ...stat,
+               date: new Date().toDateString(),
+               score: action.value
+            }
+            break
+
+         default:
+            newStat = stat
+      }
+
+      localStorage.setItem('quizzical-stat', JSON.stringify(newStat))
+
+      return newStat
+   }
+
+   const [stat, dispatch] = React.useReducer(reducer, initStat)
    const [quiz, setQuiz] = React.useState([]);
    const quizElements = quiz.map(item => {
       return (
@@ -16,7 +53,7 @@ export default function Form(props) {
             choices={item.choices}
             answer={item.answer}
             correctAnswer={item.correct_answer}
-            score={score}
+            score={stat.score}
          />
       )
    });
@@ -24,6 +61,15 @@ export default function Form(props) {
    // Fetch Trivia data.
    React.useEffect(() => {
       console.log('Getting Trivia data...')
+
+      // Save settings to local storage.
+      dispatch({
+         type: 'settings',
+         value: {
+            category: props.settings.category,
+            difficulty: props.settings.difficulty
+         }
+      })
 
       async function getTrivia() {
          const url = 'https://opentdb.com/api.php?'
@@ -74,9 +120,9 @@ export default function Form(props) {
       })
 
       if (noAnswers > 0) {
-         setScore(-1)
+         dispatch({ type: 'score', value: -1 })
       } else {
-         setScore(quiz.length - wrongAnswers.length)
+         dispatch({ type: 'score', value: quiz.length - wrongAnswers.length })
          props.toggleBtn() // Advanced to home page (Cover page).
       }
    }
@@ -101,11 +147,11 @@ export default function Form(props) {
          }
          <div className="form--quiz__submit-button-container">
             {
-               (score > 0)
-               && <p>You scored <strong>{score}</strong>/{quiz.length} correct answers</p>
+               (stat.score > 0)
+               && <p>You scored <strong>{stat.score}</strong>/{quiz.length} correct answers</p>
             }
             {
-               (score < 0)
+               (stat.score < 0)
                && <p className="form--quiz__paragraph-error">
                   Please answer all of the questions before submitting
                </p>

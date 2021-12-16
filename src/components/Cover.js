@@ -1,6 +1,7 @@
 import React from "react"
 import { categories, difficulties } from './category.js'
 import './Cover.css'
+import Stat from './Stat'
 
 class Cover extends React.Component {
    constructor(props) {
@@ -36,6 +37,7 @@ class Cover extends React.Component {
                <select name="difficulty">{this.difficultyElements}</select>
                <button>Start Quiz</button>
             </form>
+            <Stat />
          </div>
       )
    }
