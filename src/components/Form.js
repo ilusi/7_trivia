@@ -2,6 +2,7 @@ import React from "react"
 import Quiz from './Quiz'
 import { nanoid } from "nanoid"
 import './Form.css'
+import Confetti from 'react-confetti'
 // import data from './data'
 
 export default function Form(props) {
@@ -146,6 +147,9 @@ export default function Form(props) {
                />
          }
          <div className="form--quiz__submit-button-container">
+            {
+               (stat.score === quiz.length) && <Confetti />
+            }
             {
                (stat.score > 0)
                && <p>You scored <strong>{stat.score}</strong>/{quiz.length} correct answers</p>
