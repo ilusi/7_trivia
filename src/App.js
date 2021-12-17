@@ -2,7 +2,13 @@ import React from "react"
 import Cover from './components/Cover'
 import Form from './components/Form'
 import './App.css'
+(() => {
+   const hours = new Date().getHours()
 
+   if ((hours > 18) || (7 > hours)) {
+      document.body.classList.toggle('dark-mode')
+   }
+})()
 export default function App() {
    // There are 3 pages total in the Trivia: List of pages and buttons' labels.
    const PAGE_COVER = "start-quiz"
