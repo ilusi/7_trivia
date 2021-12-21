@@ -61,8 +61,6 @@ export default function Form(props) {
 
    // Fetch Trivia data.
    React.useEffect(() => {
-      console.log('Getting Trivia data...')
-
       // Save settings to local storage.
       dispatch({
          type: 'settings',
@@ -72,12 +70,14 @@ export default function Form(props) {
          }
       })
 
-      async function getTrivia() {
-         const url = 'https://opentdb.com/api.php?'
-            + 'amount=5'
-            + '&category=' + props.settings.category
-            + '&difficulty=' + props.settings.difficulty
+      const url = 'https://opentdb.com/api.php?'
+         + 'amount=5'
+         + '&category=' + props.settings.category
+         + '&difficulty=' + props.settings.difficulty
 
+      console.log('Getting Trivia data from ' + url)
+
+      async function getTrivia() {
          const res = await fetch(url)
          const data = await res.json()
 

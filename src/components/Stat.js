@@ -1,14 +1,19 @@
 import React from "react"
-import { categories } from "./category"
+import { categories, difficulties } from "./category"
 
 class Stat extends React.Component {
    constructor() {
       super()
 
+      // Show previous stat if user has played.
       this.stat = JSON.parse(localStorage.getItem('quizzical-stat'))
 
       this.category = this.stat && categories.find(
          cat => cat.value === this.stat.category
+      ).text
+
+      this.difficulty = this.stat && difficulties.find(
+         dif => dif.value === this.stat.difficulty
       ).text
    }
 
@@ -20,7 +25,7 @@ class Stat extends React.Component {
             <ul>
                <li>Last played on {this.stat.date}</li>
                <li>Category: {this.category}</li>
-               <li>Difficulty: {this.stat.difficulty}</li>
+               <li>Difficulty: {this.difficulty}</li>
                <li>
                   {
                      this.stat.score > 0
